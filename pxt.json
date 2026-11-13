@@ -8,7 +8,8 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "i2c.ts"
+        "i2c.ts",
+        "advanced.ts"
     ],
     "testFiles": [
         "test.ts"
