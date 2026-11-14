@@ -130,7 +130,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% group="Text" color="#007FFF" subcategory="OLED Display"
     //% block="Text Zeile %row von %col bis %end %value || %align" weight=7
     //% row.min=0 row.max=15 col.min=0 col.max=15 end.min=0 end.max=15 end.defl=15
-    //% value.shadow="pins_text"
+    //% value.shadow="i2c_text"
     //% align.defl=0
     //% inlineInputMode=inline
     export function oled_write_text(row: number, col: number, end: number, value: any, align?: oled_align) {

@@ -53,23 +53,23 @@ https://github.com/sparkfun/Qwiic_EEPROM_Py/blob/main/qwiic_eeprom.py
 
     //% group="EEPROM lesen in Buffer (I²C 0x50..0x57)" color="#FF7F3F" subcategory="EEPROM"
     //% block="EEPROM lesen Adresse %adr Länge %size || %i2c" weight=6
-    //% adr.shadow=pins_hex16
+    //% adr.shadow=hex16
     export function readEEPROM(adr: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): Buffer {
         return i2cReadEEPROM(adr, size, i2c) //.toArray(NumberFormat.UInt8LE)
     }
 
     //% group="EEPROM schreiben (Adresse: 0..65535)" color="#FF7F3F" subcategory="EEPROM"
     //% block="EEPROM schreiben Adresse %adr Buffer %bytes || %i2c" weight=4
-    //% adr.shadow=pins_hex16
+    //% adr.shadow=hex16
     export function progEEPROM(adr: number, bytes: Buffer, i2c = eI2Ceeprom.EEPROM_x50) {
         return i2cWriteEEPROM(adr, bytes, i2c)
         //  return i2cWriteEEPROM(adr, Buffer.fromArray(bytes), i2c)
     }
 
     //% group="EEPROM 512 Page-Adressen je 128 Byte" color="#FF7F3F" subcategory="EEPROM"
-    //% block="Page %x3 %x2 %x1"
-    export function page(x4: H4, x3: H3, x2: H2) {
-        return x4 + x3 + x2
+    //% block="Page %x16 %x2"
+    export function page(x16:eHEX8bit, x2: H2) {//x4: H4, x3: H3, x2: H2
+        return x16 + x2
     }
 
     // HEX Parameter
@@ -78,10 +78,12 @@ https://github.com/sparkfun/Qwiic_EEPROM_Py/blob/main/qwiic_eeprom.py
         x8 = 0x8, x9 = 0x9, xA = 0xA, xB = 0xB, xC = 0xC, xD = 0xD, xE = 0xE, xF = 0xF
     } */
     export enum H2 {
+        //% block="00"
         x00 = 0x00, /*x10 = 0x10, x20 = 0x20, x30 = 0x30, x40 = 0x40, x50 = 0x50, x60 = 0x60, x70 = 0x70,*/
+        //% block="80"
         x80 = 0x80 /*, x90 = 0x90, xA0 = 0xA0, xB0 = 0xB0, xC0 = 0xC0, xD0 = 0xD0, xE0 = 0xE0, xF0 = 0xF0*/
     }
-    export enum H3 {
+ /*    export enum H3 {
         x000 = 0x000, x100 = 0x100, x200 = 0x200, x300 = 0x300, x400 = 0x400, x500 = 0x500, x600 = 0x600, x700 = 0x700,
         x800 = 0x800, x900 = 0x900, xA00 = 0xA00, xB00 = 0xB00, xC00 = 0xC00, xD00 = 0xD00, xE00 = 0xE00, xF00 = 0xF00
     }
@@ -89,5 +91,5 @@ https://github.com/sparkfun/Qwiic_EEPROM_Py/blob/main/qwiic_eeprom.py
         x0000 = 0x0000, x1000 = 0x1000, x2000 = 0x2000, x3000 = 0x3000, x4000 = 0x4000, x5000 = 0x5000, x6000 = 0x6000, x7000 = 0x7000,
         x8000 = 0x8000, x9000 = 0x9000, xA000 = 0xA000, xB000 = 0xB000, xC000 = 0xC000, xD000 = 0xD000, xE000 = 0xE000, xF000 = 0xF000
     }
-
+ */
 } // eeprom.ts

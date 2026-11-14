@@ -2,10 +2,10 @@
 namespace i2c { // hex-bin.ts
 
 
-  
 
 
-   
+
+
 
 
 
@@ -31,27 +31,27 @@ namespace i2c { // hex-bin.ts
             return hex
     }
 
-    //% blockId=pins_hex4
+    //% blockId=hex4
     //% group="HEX 0..F" subcategory=HEX-BIN
     //% block="%x0" weight=11
     export function hex4(x0: eHEX4bit) { return (x0 & 0xF) }
 
-    // blockId=pins_hex44
+    // blockId=hex44
     // group="HEX 0..F" subcategory=HEX-BIN
     // block="%x1 %x0" weight=10
     //export function hex44(x1: eHEX4bit, x0: eHEX4bit) { return (x1 << 4) | (x0 & 0xF) }// blockHidden=true
 
 
 
-    //% blockId=pins_hex8
+    //% blockId=hex8
     //% group="HEX 0..F" subcategory=HEX-BIN
     //% block="%x0" weight=9
     export function hex8(x0: eHEX8bit) { return x0 }
 
-    //% blockId=pins_hex16
+    //% blockId=hex16
     //% group="HEX 0..F" subcategory=HEX-BIN
-    //% block="%x8 %x0" weight=8
-    export function hex16(x8: eHEX8bit, x0: eHEX8bit) { return (x8 << 8) + x0 }
+    //% block="%x8 + %x0" weight=8
+    export function hex16(x8: eHEX8bit, x0: eHEX8bit): number { return (x8 << 8) + x0 }
 
 
     // ========== group="BIN" subcategory=HEX-BIN
