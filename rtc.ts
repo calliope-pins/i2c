@@ -28,7 +28,7 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
     //% group="Uhr lesen (vorher 'Datum und Zeit einlesen')" subcategory="RTC Uhr" color=#007FBF
     //% block="%register als Zahl" weight=8
     //% register.min=0 register.max=6
-    //% register.shadow=pins_rtc_eRegister
+    //% register.shadow=rtc_Register
     export function rtc_get_int(register: number): number {
         if (rtc_Buffer && between(register, 0, 6))
             return (rtc_Buffer[register] >> 4) * 10 + (rtc_Buffer[register] & 0x0F)
@@ -253,10 +253,10 @@ CMOS Real-Time Clock (RTC) - Quarz-Uhr mit Knopfzelle CR1225 3Volt
         Jahr = 6
     }
 
-    //% blockId=pins_rtc_eRegister blockHidden=true
+    //% blockId=rtc_Register blockHidden=true
     //% group="Real Time Clock PCF85063TP" subcategory="RTC Uhr" color=#007FBF
     //% block="%pRegister"
-    export function pins_rtc_eRegister(pRegister: rtc_eRegister): number { return pRegister }
+    export function rtc_Register(pRegister: rtc_eRegister): number { return pRegister }
 
 
 

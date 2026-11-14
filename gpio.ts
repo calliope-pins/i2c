@@ -10,10 +10,10 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     const gpio_OUT_Buffer: Buffer = Buffer.create(8) // index [i2c_addr & 7]
 
-    //% blockId=pins_gpio_I2C_ADDRESS blockHidden=true
+    //% blockId=gpio_I2C_ADDRESS blockHidden=true
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="%pADDR"
-    export function pins_gpio_I2C_ADDRESS(pADDR: gpio_eI2C_ADDRESS): number { return pADDR }
+    export function gpio_I2C_ADDRESS(pADDR: gpio_eI2C_ADDRESS): number { return pADDR }
     export enum gpio_eI2C_ADDRESS {
         GPIO_x27 = 0x27, GPIO_x26 = 0x26, GPIO_x25 = 0x25, GPIO_x24 = 0x24,
         GPIO_x23 = 0x23, GPIO_x22 = 0x22, GPIO_x21 = 0x21, GPIO_x20 = 0x20
@@ -39,7 +39,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr angeschlossen" weight=6
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     export function gpio_connected(i2c_addr: number): boolean {
         let bu = i2cWriteReadBuffer(i2c_addr, Buffer.fromArray([gpio_eCommandByte.INPUT_PORT]), 1)
         return bu ? true : false
@@ -47,7 +47,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="SparkFun Qwiic GPIO (I²C 0x20..0x27)" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr Konfiguration | Pin 7 %pIO7 Pin 6 %pIO6 Pin 5 %pIO5 Pin 4 %pIO4 Pin 3 %pIO3 Pin 2 %pIO2 Pin 1 %pIO1 Pin 0 %pIO0" weight=2
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     // inlineInputMode=inline
     export function gpio_setMode(i2c_addr: number, pIO7: gpio_eIO, pIO6: gpio_eIO, pIO5: gpio_eIO, pIO4: gpio_eIO, pIO3: gpio_eIO, pIO2: gpio_eIO, pIO1: gpio_eIO, pIO0: gpio_eIO) {
         let r3 = 0b00000000 // CONFIGURATION 0=output 1=input
@@ -77,7 +77,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr lese %pin" weight=6
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     //% pin.shadow=pins_gpio_pin
     export function gpio_readBit(i2c_addr: number, pin: number): boolean {
         return (gpio_readByte(i2c_addr) & 2 ** (pin & 0x07)) != 0
@@ -85,7 +85,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr schalte %pin %bit" weight=5
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     //% pin.shadow=pins_gpio_pin
     //% bit.shadow=toggleOnOff
     export function gpio_writeBit(i2c_addr: number, pin: number, bit: boolean) {
@@ -100,7 +100,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr lese INPUT Byte" weight=2
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     export function gpio_readByte(i2c_addr: number): number { // Bitweise AND setzt die OUTPUT Bits auf 0
         let bu = i2cWriteReadBuffer(i2c_addr, Buffer.fromArray([gpio_eCommandByte.INPUT_PORT]), 1)
         if (bu)
@@ -112,7 +112,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
 
     //% group="GPIO: General-purpose input/output" subcategory=GPIO color=#7F0000
     //% block="I²C %i2c_addr schreibe Byte %byte" weight=1
-    //% i2c_addr.shadow=pins_gpio_I2C_ADDRESS
+    //% i2c_addr.shadow=gpio_I2C_ADDRESS
     //% byte.min=0 byte.max=255 byte.defl=1
     export function gpio_writeByte(i2c_addr: number, byte: number) {
         gpio_OUT_Buffer[i2c_addr & 7] = byte
@@ -127,7 +127,7 @@ https://cdn.sparkfun.com/assets/b/b/f/1/7/TCA9534.pdf
     //% group="7-Segment Anzeige an Port (7-0) (.GFEDCBA)" subcategory=GPIO color=#7F0000
     //% block="wandle %hexZiffer um in 7-Segment || Punkt %punkt"
     //% hexZiffer.min=0 hexZiffer.max=15
-    //% hexZiffer.shadow=pins_hex4
+    //% hexZiffer.shadow=hex4
     //% punkt.shadow=toggleOnOff
     export function gpio_7segment(hexZiffer: number, punkt?: boolean) {
         let dp: number = (punkt ? 0b10000000 : 0b00000000) // dezimalpunkt
