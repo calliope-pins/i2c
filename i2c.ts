@@ -1,5 +1,5 @@
 
-//% color=#007FFF icon="\uf1e6" block="i2c" weight=24
+//% color=#007FFF icon="\uf1e6" block="I²C" weight=24
 namespace i2c // i2c.ts
 /*
 

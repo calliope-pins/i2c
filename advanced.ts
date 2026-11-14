@@ -109,8 +109,24 @@ namespace i2c // i2c.ts
     }
 
 
+    //% group="String" advanced=true
+    //% block="Zahl %n → Text || Kommastellen %kommastellen" weight=6
+    //% kommastellen.min=0 kommastellen.max=4
+    export function toText(n: number, kommastellen?: number): string {
+        let t = n.toString()
+        if (kommastellen > 0 && kommastellen <= 4) {
+            let i = t.indexOf(".")
+            if (i == -1) { // i=-1 Zahl enthält kein Komma
+                t += "."
+                i = t.indexOf(".")
+            }
+            t = (t + "0000").substr(0, i + 1 + kommastellen)
+        }
+        return t.replace(".", ",")
+    }
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
+
+    //% group="String" advanced=true
     //% block="Zahl %n → HEX || %h" weight=5
     //% h.defl=h
     export function toHex(n: number, h?: string): string {
@@ -125,7 +141,7 @@ namespace i2c // i2c.ts
             return hex
     }
 
-    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
+    //% group="String" advanced=true
     //% block="Zahl %n → BIN || %b" weight=4
     //% b.defl=b
     export function toBin(n: number, b?: string): string {
@@ -143,7 +159,7 @@ namespace i2c // i2c.ts
 
 
 
-    // ========== group="25 LED Matrix" subcategory=Funktionen
+    // ========== group="25 LED Matrix" advanced=true
 
     //% group="25 LED Matrix" advanced=true
     //% block="25 LED x→0..4 %x n↑0..31 %n" weight=5
