@@ -10,6 +10,7 @@
         "README.md",
         "i2c.ts",
         "advanced.ts",
+        "hex-bin.ts",
         "buffer.ts",
         "lcd.ts",
         "oled.ts",
@@ -19,8 +20,7 @@
         "gpio.ts",
         "wattmeter.ts",
         "voice.ts",
-        "eeprom.ts",
-        "hex-bin.ts"
+        "eeprom.ts"
     ],
     "testFiles": [
         "test.ts"
