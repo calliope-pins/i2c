@@ -16,7 +16,8 @@
         "keyboards.ts",
         "joystick.ts",
         "rtc.ts",
-        "gpio.ts"
+        "gpio.ts",
+        "wattmeter.ts"
     ],
     "testFiles": [
         "test.ts"
