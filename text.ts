@@ -5,38 +5,15 @@ namespace i2c { // text.ts
 
     // ========== group="Text (string)"
 
-    // blockId=bit_text
-    // group="Text (string)" subcategory=Text
-    // block="%s" weight=9
-    //export function bit_text(s: string): string { return s }
+    //% blockId=i2c_text
+    //% group="Text (string)" subcategory=Text
+    //% block="%s" weight=9
+    export function i2c_text(s: string): string { return s }
+
 
 
     //% group="Text (string)" subcategory=Text
-    //% block="formatiere %pText Länge %pLength %pFormat" weight=6
-    //% pText.shadow=i2c_text
-    export function formatText(pText: any, pLength: number, pFormat: eAlign) {
-        let text: string = convertToText(pText)
-        if (text.length > pLength) { return text.substr(0, pLength) }
-        else if (text.length < pLength && pFormat == eAlign.left) { return text + replicate(" ", pLength - text.length) }
-        else if (text.length < pLength && pFormat == eAlign.right) { return replicate(" ", pLength - text.length) + text }
-        else { return text }
-    }
-
-    //% group="Text (string)" subcategory=Text
-    //% block="wiederhole Char %pChar length %pLength" weight=5
-    export function replicate(pChar: string, pLength: number) {
-        let s: string = ""
-        if (pChar.length > 0 && pLength > 0) {
-            while (s.length < pLength) {
-                s = s + pChar
-            }
-        }
-        return s
-    }
-
-
-    //% group="String" subcategory=Text
-    //% block="Zahl %n → Text || Kommastellen %kommastellen" weight=6
+    //% block="Zahl %n → Text || Kommastellen %kommastellen" weight=7
     //% kommastellen.min=0 kommastellen.max=4
     export function toText(n: number, kommastellen?: number): string {
         let t = n.toString()
@@ -50,6 +27,30 @@ namespace i2c { // text.ts
         }
         return t.replace(".", ",")
     }
+
+    //% group="Text (string)" subcategory=Text
+    //% block="formatiere %pText Länge %pLength %pFormat" weight=6
+    //% pText.shadow=i2c_text
+    export function formatText(pText: any, pLength: number, pFormat: eAlign) {
+        let text: string = convertToText(pText)
+        if (text.length > pLength) { return text.substr(0, pLength) }
+        else if (text.length < pLength && pFormat == eAlign.left) { return text + replicate(" ", pLength - text.length) }
+        else if (text.length < pLength && pFormat == eAlign.right) { return replicate(" ", pLength - text.length) + text }
+        else { return text }
+    }
+
+    //% group="Text (string)" subcategory=Text
+    //% block="wiederhole Zeichen %pChar Länge %pLength" weight=5
+    export function replicate(pChar: string, pLength: number) {
+        let s: string = ""
+        if (pChar.length > 0 && pLength > 0) {
+            while (s.length < pLength) {
+                s = s + pChar
+            }
+        }
+        return s
+    }
+
 
 
 } // text.ts

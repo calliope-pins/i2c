@@ -6,9 +6,7 @@ namespace i2c // i2c.ts
 
     // ========== group="Kommentar" advanced=true
 
-    //% blockId=i2c_text block="%s" blockHidden=true
-    export function i2c_text(s: string): string { return s }
-
+  
     //% group="Kommentar" advanced=true
     //% block="// %text" weight=9
     //% text.shadow="i2c_text"
@@ -52,26 +50,26 @@ namespace i2c // i2c.ts
 
 
     //% group="Mathematik" advanced=true
-    //% block="charCodeAt %text index %index" weight=6
+    //% block="charCodeAt %text index %index" weight=16
     export function charCodeAt(text: string, index: number) {
         return text.charCodeAt(index)
     }
 
     //% group="Mathematik" advanced=true
-    //% block="parseInt %text || radix %radix" weight=4
+    //% block="parseInt %text || radix %radix" weight=14
     //% radix.min=2 radix.max=16 radix.defl=10
     export function parseint(text: string, radix?: number) {
         return parseInt(text, radix)
     }
 
     //% group="Mathematik" advanced=true
-    //% block="roundWithPrecision number %x digits %digits" weight=2
+    //% block="runden %x Kommastellen %digits" weight=12
     //% digits.min=0 digits.max=4 digits.defl=2
     export function roundWithPrecision(x: number, digits: number) { return Math.roundWithPrecision(x, digits) }
 
 
     //% group="Mathematik" advanced=true
-    //% block="min %x1 %x2 || Grenzwert %grenzwert" weight=1
+    //% block="min %x1 %x2 || Grenzwert %grenzwert" weight=11
     //% grenzwert.defl=4096
     export function minx(x1: number, x2: number, grenzwert = 4096) {
         let d1 = x1 - x2
@@ -83,6 +81,63 @@ namespace i2c // i2c.ts
             return d2
         else
             return d3
+    }
+
+
+
+
+    // ========== group="Logik (number)"
+
+    export enum eBit {
+        //% block="a & b AND"
+        AND,
+        //% block="a | b OR"
+        OR,
+        //% block="a ^ b XOR"
+        XOR,
+        //% block="(~a) & b (NOT a) AND b"
+        NOT_AND,
+        //% block="a << b"
+        LEFT,
+        //% block="a >> b"
+        RIGHT,
+        //% block="a >>> b"
+        RIGHTZ
+    }
+
+    //% group="Mathematik" advanced=true
+    //% block="Bitweise %a %operator %b" weight=4
+    export function bitwise(a: number, operator: eBit, b: number): number {
+        switch (operator) {
+            case eBit.AND: { return a & b }
+            case eBit.OR: { return a | b }
+            case eBit.XOR: { return a ^ b }
+            case eBit.NOT_AND: { return (~a) & b }
+            case eBit.LEFT: { return a << b }
+            case eBit.RIGHT: { return a >> b }
+            case eBit.RIGHTZ: { return a >>> b }
+            default: { return a }
+        }
+    }
+
+    //% group="Mathematik" advanced=true
+    //% block="Bitweise NOT %a" weight=3
+    export function not(a: number): number { return ~a }
+
+
+    //% group="Mathematik" advanced=true
+    //% block="Vorzeichen %i Bits 2** %exp" weight=2
+    //% exp.defl=7
+    export function sign(i: number, exp: number): number {
+        //i = i2c.HEXe(i2c.H4.x40, i2c.H0.x1)
+        if (i < 2 ** exp) { // 2**6 = 64 = 0x40
+            return i
+        } else {
+            i = ~i // Bitwise Not
+            i = i & ((2 ** exp) - 1) // 63 = 0x3F alle Bits links löschen
+            i += 1
+            return -i
+        }
     }
 
 
