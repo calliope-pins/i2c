@@ -15,7 +15,8 @@
         "oled.ts",
         "keyboards.ts",
         "joystick.ts",
-        "rtc.ts"
+        "rtc.ts",
+        "gpio.ts"
     ],
     "testFiles": [
         "test.ts"
