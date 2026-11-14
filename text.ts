@@ -3,12 +3,28 @@ namespace i2c { // text.ts
 
 
 
+    // ========== group="25 LED-Matrix" subcategory=Text
+
+    let n_showString = ""
+
+    //% group="25 LED-Matrix" subcategory=Text
+    //% block="zeige Text wenn geändert %text" weight=8
+    //% text.shadow=i2c_text
+    export function zeigeText(text: any) {
+        let tx = convertToText(text)
+        if (n_showString != tx) {
+            n_showString = tx
+            basic.showString(tx)
+        }
+    }
+
     // ========== group="Text (string)"
 
     //% blockId=i2c_text
     //% group="Text (string)" subcategory=Text
     //% block="%s" weight=9
     export function i2c_text(s: string): string { return s }
+
 
 
 
