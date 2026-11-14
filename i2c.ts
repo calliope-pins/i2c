@@ -168,7 +168,7 @@ namespace i2c // i2c.ts
     //% block="i2cWriteBuffer I²C %i2cAdresse Buffer %buf || repeat %repeat" weight=9
     //% i2cAdresse.shadow=pins_i2cAdressen
     //% repeat.shadow=toggleYesNo
-    export function pins_i2cWriteBuffer(i2cAdresse: number, buf: Buffer, repeat = false) {
+    export function i2cWriteBuffer(i2cAdresse: number, buf: Buffer, repeat = false) {
         return pins.i2cWriteBuffer(i2cAdresse, buf, repeat)
     }
 
@@ -177,14 +177,14 @@ namespace i2c // i2c.ts
     //% i2cAdresse.shadow=pins_i2cAdressen
     //% size.min=1 size.max=128 size.defl=1
     //% repeat.shadow=toggleYesNo
-    export function pins_i2cReadBuffer(i2cAdresse: number, size: number, repeat = false) {
+    export function i2cReadBuffer(i2cAdresse: number, size: number, repeat = false) {
         return pins.i2cReadBuffer(i2cAdresse, size, repeat)
     }
 
     //% group="I²C Write / Read"
     //% block="i2cWriteReadBuffer I²C %i2cAdresse Buffer %buf size %size" weight=7
     //% i2cAdresse.shadow=pins_i2cAdressen
-    export function pins_i2cWriteReadBuffer(i2cAdresse: number, buf: Buffer, size: number) {
+    export function i2cWriteReadBuffer(i2cAdresse: number, buf: Buffer, size: number) {
         let buffer: Buffer
         if (pins.i2cWriteBuffer(i2cAdresse, buf, true) == 0)
             buffer = pins.i2cReadBuffer(i2cAdresse, size)

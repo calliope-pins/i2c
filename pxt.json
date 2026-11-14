@@ -12,7 +12,8 @@
         "advanced.ts",
         "buffer.ts",
         "lcd.ts",
-        "oled.ts"
+        "oled.ts",
+        "keyboards.ts"
     ],
     "testFiles": [
         "test.ts"
