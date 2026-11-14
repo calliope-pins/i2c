@@ -10,7 +10,9 @@
         "README.md",
         "i2c.ts",
         "advanced.ts",
-        "buffer.ts"
+        "buffer.ts",
+        "lcd.ts",
+        "oled.ts"
     ],
     "testFiles": [
         "test.ts"

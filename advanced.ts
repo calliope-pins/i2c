@@ -109,6 +109,40 @@ namespace i2c // i2c.ts
     }
 
 
+
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
+    //% block="Zahl %n → HEX || %h" weight=5
+    //% h.defl=h
+    export function toHex(n: number, h?: string): string {
+        let hex = ""
+        do {
+            hex = "0123456789AbCdEF".charAt(n % 16) + hex
+            n >>= 4 //   n = Math.idiv(n, 16) // Integer-Division in MakeCode
+        } while (n > 0)
+        if (h)
+            return h + hex
+        else
+            return hex
+    }
+
+    //% group="Zeichen 0123456789AbCdEF hHLPU +-°" subcategory="4-Digit Displays" color=#9F79EE
+    //% block="Zahl %n → BIN || %b" weight=4
+    //% b.defl=b
+    export function toBin(n: number, b?: string): string {
+        let bin = ""
+        do {
+            bin = "01".charAt(n % 2) + bin
+            n >>= 1
+        } while (n > 0)
+        if (b)
+            return b + bin
+        else
+            return bin
+    }
+
+
+
+
     // ========== group="25 LED Matrix" subcategory=Funktionen
 
     //% group="25 LED Matrix" advanced=true
