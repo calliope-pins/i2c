@@ -132,13 +132,14 @@ Lutz Elßner, Freiberg, Oktober 2025, lutz@elssner.net
 
 
     // ========== group="Text anzeigen"
-
-    export enum eAlign {
-        //% block="linksbündig"
-        left,
-        //% block="rechtsbündig"
-        right
-    }
+    /* in hex-bin.ts
+        export enum eAlign {
+            //% block="linksbündig"
+            left,
+            //% block="rechtsbündig"
+            right
+        }
+    */
 
     //% group="Text anzeigen" subcategory="LCD Display" color=#001FCF
     //% block="Text Zeile %row von %col bis %end %value || %align" weight=7

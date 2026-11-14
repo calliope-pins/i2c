@@ -2,45 +2,99 @@
 namespace i2c { // hex-bin.ts
 
 
-// ========== group="HEX" subcategory=HEX-BIN
+  
+
+    //% group="HEX" subcategory=HEX-BIN
+    //% block="Zahl %n → HEX || %h" weight=5
+    //% h.defl=h
+    export function toHex(n: number, h?: string): string {
+        let hex = ""
+        do {
+            hex = "0123456789AbCdEF".charAt(n % 16) + hex
+            n >>= 4 //   n = Math.idiv(n, 16) // Integer-Division in MakeCode
+        } while (n > 0)
+        if (h)
+            return h + hex
+        else
+            return hex
+    }
+
+    //% group="BIN" subcategory=HEX-BIN
+    //% block="Zahl %n → BIN || %b" weight=4
+    //% b.defl=b
+    export function toBin(n: number, b?: string): string {
+        let bin = ""
+        do {
+            bin = "01".charAt(n % 2) + bin
+            n >>= 1
+        } while (n > 0)
+        if (b)
+            return b + bin
+        else
+            return bin
+    }
+
+
+
+
+
+
+
+
+    // ========== group="HEX" subcategory=HEX-BIN
 
     //% blockId=pins_hex4
-    //% group="HEX" subcategory=HEX-BIN
+    //% group="HEX 0..F" subcategory=HEX-BIN
     //% block="%x0" weight=11
     export function hex4(x0: eHEX4bit) { return (x0 & 0xF) }
 
     // blockId=pins_hex44
-    // group="HEX" subcategory=HEX-BIN
+    // group="HEX 0..F" subcategory=HEX-BIN
     // block="%x1 %x0" weight=10
     //export function hex44(x1: eHEX4bit, x0: eHEX4bit) { return (x1 << 4) | (x0 & 0xF) }// blockHidden=true
 
 
 
     //% blockId=pins_hex8
-    //% group="HEX" subcategory=HEX-BIN
+    //% group="HEX 0..F" subcategory=HEX-BIN
     //% block="%x0" weight=9
     export function hex8(x0: eHEX8bit) { return x0 }
 
     //% blockId=pins_hex16
-    //% group="HEX" subcategory=HEX-BIN
+    //% group="HEX 0..F" subcategory=HEX-BIN
     //% block="%x8 %x0" weight=8
     export function hex16(x8: eHEX8bit, x0: eHEX8bit) { return (x8 << 8) + x0 }
 
 
-// ========== group="BIN" subcategory=HEX-BIN
-
+    // ========== group="BIN" subcategory=HEX-BIN
 
     //% blockId=bin4
-    //% group="BIN" subcategory=HEX-BIN weight=13
+    //% group="BIN 0..1" subcategory=HEX-BIN weight=13
     //% block="%b0"
     export function bin4(b0: eBIN4bit) { return b0 }
 
     //% blockId=bin8
-    //% group="BIN" subcategory=HEX-BIN weight=12
+    //% group="BIN 0..1" subcategory=HEX-BIN weight=12
     //% block="%b4 %b0"
     export function bin8(b4: eBIN4bit, b0: eBIN4bit) { return (b4 << 4) + b0 }
 
 
+
+
+    // ========== ENUMs
+
+    export enum eAlign {
+        //% block="linksbündig"
+        left,
+        //% block="rechtsbündig"
+        right
+    }
+
+    export enum eLength {
+        HEX_ = 0, HEX_F = 1, HEX_FF = 2, HEX_FFF = 3, HEX_FFFF = 4, HEX_FFFFFF = 6, HEX_FFFFFFFF = 8,
+        BIN_ = 0x100, BIN_1111 = 0x104, BIN_11111 = 0x105, BIN_111111 = 0x106, BIN_11111111 = 0x108, BIN_12_ = 0x10C, BIN_16_ = 0x110,
+        toString = 0x1000
+    }
 
 
     // BIN Parameter
