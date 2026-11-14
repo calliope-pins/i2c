@@ -13,7 +13,8 @@
         "buffer.ts",
         "lcd.ts",
         "oled.ts",
-        "keyboards.ts"
+        "keyboards.ts",
+        "joystick.ts"
     ],
     "testFiles": [
         "test.ts"
