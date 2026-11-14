@@ -6,12 +6,12 @@ namespace i2c // i2c.ts
 
     // ========== group="Kommentar" advanced=true
 
-    //% blockId=pins_text block="%s" blockHidden=true
-    export function pins_text(s: string): string { return s }
+    //% blockId=i2c_text block="%s" blockHidden=true
+    export function i2c_text(s: string): string { return s }
 
     //% group="Kommentar" advanced=true
     //% block="// %text" weight=9
-    //% text.shadow="pins_text"
+    //% text.shadow="i2c_text"
     export function comment(text: any): void { }
 
 

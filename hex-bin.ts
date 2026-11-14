@@ -82,6 +82,69 @@ namespace i2c { // hex-bin.ts
     export function bin8(b4: eBIN4bit, b0: eBIN4bit) { return (b4 << 4) + b0 }
 
 
+    // ========== group="Text (string)" subcategory=HEX-BIN
+
+
+    export enum eLength {
+        HEX_ = 0, HEX_F = 1, HEX_FF = 2, HEX_FFF = 3, HEX_FFFF = 4, HEX_FFFFFF = 6, HEX_FFFFFFFF = 8,
+        BIN_ = 0x100, BIN_1111 = 0x104, BIN_11111 = 0x105, BIN_111111 = 0x106, BIN_11111111 = 0x108, BIN_12_ = 0x10C, BIN_16_ = 0x110,
+        toString = 0x1000
+    }
+
+
+    //% group="Text (string)" subcategory=HEX-BIN
+    //% block="wandle %pInt um in Text %plLength" weight=8
+    //% pLength.defl=i2c.eLength.HEX_FF
+    export function formatNumber(pInt: number, pLength: eLength) {
+        let ht: string = ""
+        let hi: number = Math.trunc(pInt)
+        /* 
+                if (hi < 0) { // negative number behandeln, links unerwünschte FF abschneiden
+                    hi = ~(Math.abs(hi) - 1)
+                    if (pLength == eLength.HEX_F || pLength == eLength.BIN_1111) { hi = hi & 0xF }
+                    else if (pLength == eLength.HEX_FF || pLength == eLength.BIN_11111111) { hi = hi & 0xFF }
+                    else if (pLength == eLength.HEX_FFF || pLength == eLength.BIN_12_) { hi = hi & 0xFFF }
+                    else if (pLength == eLength.HEX_FFFF || pLength == eLength.BIN_16_) { hi = hi & 0xFFFF }
+                    else if (pLength == eLength.HEX_FFFFFF) { hi = hi & 0xFFFFFF }
+                    else if (pLength == eLength.HEX_FFFFFFFF) { hi = hi & 0xFFFFFFFF }
+                    else if (pLength == eLength.toString) { }
+                    else { hi = hi & 0xFF } // Standard 8 Bit
+                }
+         */
+        if (pLength < eLength.BIN_) {
+            // HEX pLength = 0, 1, 2, 3, 4, 6, 8
+            while (hi > 0) {
+                ht = "0123456789ABCDEF".charAt(hi % 16) + ht
+                //hi = hi >> 4 // bei 32 bit number >= 0x80000000 kommt 0 raus
+                hi = Math.trunc(hi / 16)
+            }
+            // kürzere Strings mit "0" verlängern, längere so lassen
+            if (ht.length < pLength) { ht = replicate("0", pLength - ht.length) + ht }
+        } else if (pLength == eLength.toString) {
+            // toString pLength = 0x1000
+            ht = pInt.toString()
+        } else {
+            // BIN
+            while (hi > 0) {
+                ht = "01".charAt(hi % 2) + ht
+                hi = hi >> 1
+            }
+            // kürzere Strings mit "0" verlängern, längere so lassen
+            // BIN_ = 0
+            if (ht.length < pLength - eLength.BIN_) { ht = replicate("0", pLength - eLength.BIN_ - ht.length) + ht }
+        }
+        return ht
+    }
+
+    //% group="Text (string)" subcategory=HEX-BIN
+    //% block="wandle %pNumber um in HEX %pFormat" weight=7
+    //% pFormat.defl=NumberFormat.UInt16BE
+    export function formatHex(pNumber: number, pFormat: NumberFormat) {
+        let bu = Buffer.create(Buffer.sizeOfNumberFormat(pFormat))
+        bu.setNumber(pFormat, 0, pNumber)
+        return bu.toHex()
+    }
+
 
 
     // ========== ENUMs
@@ -91,12 +154,6 @@ namespace i2c { // hex-bin.ts
         left,
         //% block="rechtsbündig"
         right
-    }
-
-    export enum eLength {
-        HEX_ = 0, HEX_F = 1, HEX_FF = 2, HEX_FFF = 3, HEX_FFFF = 4, HEX_FFFFFF = 6, HEX_FFFFFFFF = 8,
-        BIN_ = 0x100, BIN_1111 = 0x104, BIN_11111 = 0x105, BIN_111111 = 0x106, BIN_11111111 = 0x108, BIN_12_ = 0x10C, BIN_16_ = 0x110,
-        toString = 0x1000
     }
 
 
