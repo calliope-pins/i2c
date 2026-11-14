@@ -9,7 +9,8 @@
         "main.ts",
         "README.md",
         "i2c.ts",
-        "advanced.ts"
+        "advanced.ts",
+        "buffer.ts"
     ],
     "testFiles": [
         "test.ts"
