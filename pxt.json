@@ -19,7 +19,8 @@
         "gpio.ts",
         "wattmeter.ts",
         "voice.ts",
-        "eeprom.ts"
+        "eeprom.ts",
+        "hex-bin.ts"
     ],
     "testFiles": [
         "test.ts"
