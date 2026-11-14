@@ -4,8 +4,20 @@ namespace i2c { // hex-bin.ts
 
   
 
-    //% group="HEX" subcategory=HEX-BIN
-    //% block="Zahl %n → HEX || %h" weight=5
+
+   
+
+
+
+
+
+
+
+    // ========== group="HEX" subcategory=HEX-BIN
+
+
+    //% group="HEX 0..F" subcategory=HEX-BIN
+    //% block="Zahl %n → HEX || %h" weight=15
     //% h.defl=h
     export function toHex(n: number, h?: string): string {
         let hex = ""
@@ -18,30 +30,6 @@ namespace i2c { // hex-bin.ts
         else
             return hex
     }
-
-    //% group="BIN" subcategory=HEX-BIN
-    //% block="Zahl %n → BIN || %b" weight=4
-    //% b.defl=b
-    export function toBin(n: number, b?: string): string {
-        let bin = ""
-        do {
-            bin = "01".charAt(n % 2) + bin
-            n >>= 1
-        } while (n > 0)
-        if (b)
-            return b + bin
-        else
-            return bin
-    }
-
-
-
-
-
-
-
-
-    // ========== group="HEX" subcategory=HEX-BIN
 
     //% blockId=pins_hex4
     //% group="HEX 0..F" subcategory=HEX-BIN
@@ -67,6 +55,21 @@ namespace i2c { // hex-bin.ts
 
 
     // ========== group="BIN" subcategory=HEX-BIN
+
+    //% group="BIN 0..1" subcategory=HEX-BIN
+    //% block="Zahl %n → BIN || %b" weight=14
+    //% b.defl=b
+    export function toBin(n: number, b?: string): string {
+        let bin = ""
+        do {
+            bin = "01".charAt(n % 2) + bin
+            n >>= 1
+        } while (n > 0)
+        if (b)
+            return b + bin
+        else
+            return bin
+    }
 
     //% blockId=bin4
     //% group="BIN 0..1" subcategory=HEX-BIN weight=13
